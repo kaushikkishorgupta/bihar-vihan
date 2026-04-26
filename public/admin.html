@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="bihar-vihaan">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Admin Panel - Bihar Vihaan Destinations Management" />
+    <title>Admin Panel - Bihar Vihaan</title>
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .admin-header {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .admin-title {
+            color: var(--brand);
+            margin-bottom: 10px;
+        }
+        .admin-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+        .login-section {
+            grid-column: 1;
+        }
+        .dashboard-section {
+            grid-column: 2;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius2);
+            font-size: 14px;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: var(--radius2);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn--primary {
+            background: var(--brand);
+            color: white;
+        }
+        .btn--secondary {
+            background: var(--muted);
+            color: white;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow2);
+        }
+        .destinations-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .destinations-table th,
+        .destinations-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .destinations-table th {
+            background: var(--beige);
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .destinations-table tr:hover {
+            background: rgba(182, 59, 51, 0.1);
+        }
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .action-buttons button {
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: var(--radius2);
+        }
+        .alert {
+            padding: 15px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .alert--success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: var(--ink);
+        }
+        .alert--error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: var(--ink);
+        }
+        .hidden {
+            display: none;
+        }
+        .welcome-message {
+            background: var(--beige);
+            padding: 15px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: var(--surface);
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--brand);
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Admin Header -->
+        <header class="admin-header">
+            <h1 class="admin-title">🔐 Admin Panel</h1>
+            <p>Bihar Vihaan Destinations Management</p>
+        </header>
+
+        <div class="admin-content">
+            <!-- Login Section -->
+            <div class="login-section" id="loginSection">
+                <h2>🔑 Admin Login</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Enter username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter password" required>
+                    </div>
+                    <button type="submit" class="btn btn--primary">🔐 Login</button>
+                </form>
+            </div>
+
+            <!-- Dashboard Section -->
+            <div class="dashboard-section hidden" id="dashboardSection">
+                <div class="welcome-message" id="welcomeMessage">
+                    <h3>👋 Welcome, Admin!</h3>
+                    <p>Manage destinations from here</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalDestinations">0</div>
+                        <div class="stat-label">Total Destinations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalViews">0</div>
+                        <div class="stat-label">Total Views</div>
+                    </div>
+                </div>
+
+                <!-- Add Destination Form -->
+                <div class="card">
+                    <h3>➕ Add New Destination</h3>
+                    <form id="addDestinationForm">
+                        <div class="form-group">
+                            <label for="name">Destination Name *</label>
+                            <input type="text" id="name" name="name" placeholder="e.g., Bodh Gaya" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location *</label>
+                            <input type="text" id="location" name="location" placeholder="e.g., Bodh Gaya, Bihar, India" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description *</label>
+                            <textarea id="description" name="description" rows="4" placeholder="Describe the destination..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image URL</label>
+                            <input type="text" id="image" name="image" placeholder="/assets/images/destination.jpg">
+                        </div>
+                        <button type="submit" class="btn btn--primary">➕ Add Destination</button>
+                    </form>
+                </div>
+
+                <!-- Destinations Table -->
+                <div class="card">
+                    <h3>🗺 Manage Destinations</h3>
+                    <table class="destinations-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Location</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="destinationsTableBody">
+                            <!-- Destinations will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin JavaScript -->
+    <script src="/assets/js/admin.js"></script>
+</body>
+</html>

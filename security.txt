@@ -1,0 +1,5 @@
+Contact: mailto:hello@biharvihaan.example
+Expires: 2027-02-23T00:00:00.000Z
+Preferred-Languages: en, hi
+Canonical: https://biharvihaan.com/.well-known/security.txt
+Policy: https://biharvihaan.com/privacy-policy.html

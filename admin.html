@@ -1,0 +1,1534 @@
+<!doctype html>
+<html lang="en" data-theme="bihar-vihaan">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Bihar Vihaan Admin Dashboard for content, media, ads, and website management." />
+    <link rel="canonical" href="https://biharvihaan.com/admin.php" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+    <link rel="alternate" hreflang="en" href="https://biharvihaan.com/en/admin" />
+  <link rel="alternate" hreflang="hi" href="https://biharvihaan.com/hi/admin" />
+  <link rel="alternate" hreflang="x-default" href="https://biharvihaan.com/" />
+  <title>Admin Control Center | Bihar Vihaan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header is-elevated">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="index.php#home" aria-label="Bihar Vihaan home">
+        <span class="brand__mark" aria-hidden="true">
+          <img class="brand__logo" src="LOGO.png" alt="Bihar Vihaan logo" width="380" height="120" loading="eager" decoding="async" />
+        </span>
+      </a>
+      <div class="nav__menu is-open">
+        <a class="nav__link" href="index.php#home">Home</a>
+        <a class="nav__link" href="blog.php">Blog</a>
+        <a class="nav__link" href="media-gallery.php">Media</a>
+      </div>
+      <div class="nav__actions">
+        <button class="btn btn--ghost lang" type="button" data-lang-toggle aria-label="Toggle language">
+          <span class="lang__pill">EN</span>
+          <span class="lang__label">Language: English</span>
+        </button>
+        <a class="btn btn--ghost" href="index.php">Back to Website</a>
+        <a class="btn btn--soft" href="admin-logout.php">Logout</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h1 class="h2">Admin Control Center <span class="status status--warn">Simple UI</span></h1>
+          <p class="muted">Focused control panel for Videos, Blog/Posts, and Ads management.</p>
+        </div>
+      </div>
+
+      <div class="admin-summary" aria-label="Dashboard metrics">
+        <article class="admin-metric card">
+          <div class="admin-metric__label">Total Blog Posts</div>
+          <div class="admin-metric__num">42</div>
+          <div class="admin-metric__meta">5 drafts pending</div>
+        </article>
+        <article class="admin-metric card">
+          <div class="admin-metric__label">Video Queue</div>
+          <div class="admin-metric__num">18</div>
+          <div class="admin-metric__meta">6 need moderation</div>
+        </article>
+        <article class="admin-metric card">
+          <div class="admin-metric__label">Ad Campaigns</div>
+          <div class="admin-metric__num">9</div>
+          <div class="admin-metric__meta">3 active now</div>
+        </article>
+        <article class="admin-metric card">
+          <div class="admin-metric__label">Ad Revenue (MTD)</div>
+          <div class="admin-metric__num">₹1,84,900</div>
+          <div class="admin-metric__meta">Target: ₹2,20,000</div>
+        </article>
+      </div>
+
+      <div class="admin-layout">
+        <aside class="admin-sidebar card" aria-label="Admin tabs">
+          <div class="admin-brand">
+            <div class="h3">Control Hub</div>
+            <p class="muted">Manage important sections quickly.</p>
+          </div>
+          <nav class="admin-tabs" data-admin-tabs>
+            <div class="admin-tab-group">Website</div>
+            <a class="admin-tab is-active" href="#overview">Overview Dashboard</a>
+            <a class="admin-tab" href="#firebase-live">Firebase Live Mode</a>
+            <a class="admin-tab" href="#hero-settings">Home & Hero</a>
+            <a class="admin-tab" href="#explore-settings">Explore Section</a>
+            <a class="admin-tab" href="#blog-settings">Blog Section</a>
+            <a class="admin-tab" href="#media-integration-settings">Media Integration</a>
+            <a class="admin-tab" href="#contact-settings">Contact Info</a>
+            <a class="admin-tab" href="#visibility-settings">Section Visibility</a>
+            <a class="admin-tab" href="#role-access">Roles & Access</a>
+
+            <div class="admin-tab-group">Content</div>
+            <a class="admin-tab" href="#blog-posts">Blog Posts</a>
+            <a class="admin-tab" href="#team-manager">Our Team</a>
+            <a class="admin-tab" href="#video-media">Video Library</a>
+
+            <div class="admin-tab-group">Revenue</div>
+            <a class="admin-tab" href="#ads-manager">Ads & Revenue</a>
+          </nav>
+          <div class="admin-note muted">Session: Demo + Firebase Live Mode</div>
+        </aside>
+
+        <section class="admin-main">
+          <article class="card admin-panel" id="overview">
+            <div class="admin-panel__head">
+              <h2 class="h3">Overview</h2>
+              <div class="admin-inline-actions">
+                <button class="btn btn--ghost" type="button">Download Report</button>
+                <button class="btn btn--primary" type="button">Publish Pending Changes</button>
+              </div>
+            </div>
+            <div class="admin-grid admin-grid--2">
+              <div class="admin-block">
+                <h3 class="h3">Quick Actions</h3>
+                <div class="admin-inline-actions">
+                  <button class="btn btn--soft" type="button" data-admin-action="open-homepage">Open Homepage</button>
+                  <button class="btn btn--soft" type="button" data-admin-action="open-media-page">Open Media Gallery</button>
+                  <button class="btn btn--soft" type="button" data-admin-action="open-blog-section">Open Blog Section</button>
+                </div>
+              </div>
+              <div class="admin-block">
+                <h3 class="h3">Note</h3>
+                <p class="muted">Panel simplified as requested. Priority is Blog, Video, and Ads operations.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="card admin-panel" id="firebase-live">
+            <div class="admin-panel__head">
+              <h2 class="h3">Firebase Live Mode</h2>
+              <div class="admin-inline-actions">
+                <span class="status" data-fb-status>Disconnected</span>
+              </div>
+            </div>
+            <div class="admin-grid admin-grid--2">
+              <div class="admin-block">
+                <h3 class="h3">Secure Admin Login</h3>
+                <form class="admin-form" data-fb-auth-form>
+                  <label class="admin-field">
+                    <span>Admin Email</span>
+                    <input type="email" id="fbAdminEmail" placeholder="admin@yourdomain.com" required />
+                  </label>
+                  <label class="admin-field">
+                    <span>Password</span>
+                    <input type="password" id="fbAdminPassword" placeholder="••••••••" required />
+                  </label>
+                  <div class="admin-inline-actions">
+                    <button class="btn btn--primary" type="submit">Login</button>
+                    <button class="btn btn--soft" type="button" data-admin-action="open-admin-signup">Sign Up</button>
+                    <button class="btn btn--ghost" type="button" data-fb-signout>Logout</button>
+                  </div>
+                </form>
+                <p class="muted" data-fb-auth-note>Connect `firebase-config.js` and sign in as admin.</p>
+              </div>
+              <div class="admin-block">
+                <h3 class="h3">Role Policy</h3>
+                <ul class="list">
+                  <li>Only users listed in `admin_users/{uid}` can access live controls.</li>
+                  <li>All writes go to Firestore collections for posts, explore cards, ads, and media.</li>
+                  <li>Image uploads use Firebase Storage folder `media/`.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="admin-grid admin-grid--2" style="margin-top:10px;">
+              <div class="admin-block">
+                <h3 class="h3">Create Additional Admin</h3>
+                <form class="admin-form" data-fb-admin-create-form>
+                  <label class="admin-field">
+                    <span>Admin Name</span>
+                    <input id="fbNewAdminName" placeholder="e.g., Content Manager" required />
+                  </label>
+                  <label class="admin-field">
+                    <span>Admin Email</span>
+                    <input type="email" id="fbNewAdminEmail" placeholder="new-admin@yourdomain.com" required />
+                  </label>
+                  <div class="admin-grid admin-grid--2">
+                    <label class="admin-field">
+                      <span>Password</span>
+                      <input type="password" id="fbNewAdminPassword" placeholder="Minimum 8 characters" required />
+                    </label>
+                    <label class="admin-field">
+                      <span>Confirm Password</span>
+                      <input type="password" id="fbNewAdminPassword2" placeholder="Re-enter password" required />
+                    </label>
+                  </div>
+                  <div class="admin-inline-actions">
+                    <button class="btn btn--primary" type="submit">Create Admin Account</button>
+                  </div>
+                </form>
+                <p class="muted" data-fb-admin-create-note>Only logged-in admin can create additional admins.</p>
+              </div>
+              <div class="admin-block">
+                <h3 class="h3">How It Works</h3>
+                <ul class="list">
+                  <li>Creates a new Firebase Authentication user.</li>
+                  <li>Adds role document in `admin_users/{uid}` with `role: admin`.</li>
+                  <li>New admin can login from this panel and edit content.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="admin-grid admin-grid--2" style="margin-top:10px;">
+              <div class="admin-block">
+                <h3 class="h3">Live Blog Manager</h3>
+                <form class="admin-form" data-fb-post-form>
+                  <label class="admin-field"><span>Title</span><input id="fbPostTitle" required /></label>
+                  <label class="admin-field"><span>Category</span><input id="fbPostCategory" required /></label>
+                  <label class="admin-field"><span>Excerpt</span><textarea id="fbPostExcerpt" rows="3" required></textarea></label>
+                  <label class="admin-field"><span>Image URL</span><input id="fbPostImage" type="url" required /></label>
+                  <label class="admin-field"><span>URL/Slug</span><input id="fbPostUrl" required /></label>
+                  <label class="admin-field"><span>Tags (comma)</span><input id="fbPostTags" /></label>
+                  <div class="admin-inline-actions">
+                    <button class="btn btn--primary" type="submit">Save Post</button>
+                  </div>
+                </form>
+                <div class="admin-list" data-fb-posts-list></div>
+              </div>
+
+              <div class="admin-block">
+                <h3 class="h3">Live Explore Cards</h3>
+                <form class="admin-form" data-fb-explore-form>
+                  <label class="admin-field"><span>Title</span><input id="fbExploreTitle" required /></label>
+                  <label class="admin-field"><span>Category</span><input id="fbExploreCategory" required /></label>
+                  <label class="admin-field"><span>Image URL</span><input id="fbExploreImage" type="url" required /></label>
+                  <div class="admin-inline-actions">
+                    <button class="btn btn--primary" type="submit">Save Explore Card</button>
+                  </div>
+                </form>
+                <div class="admin-list" data-fb-explore-list></div>
+              </div>
+            </div>
+
+            <div class="admin-grid admin-grid--2" style="margin-top:10px;">
+              <div class="admin-block">
+                <h3 class="h3">Live Ads Manager</h3>
+                <form class="admin-form" data-fb-ads-form>
+                  <label class="admin-field"><span>Campaign Title</span><input id="fbAdsTitle" required /></label>
+                  <label class="admin-field"><span>Placement</span><input id="fbAdsPlacement" required /></label>
+                  <label class="admin-field"><span>Target URL</span><input id="fbAdsTarget" type="url" required /></label>
+                  <label class="admin-field"><span>Budget</span><input id="fbAdsBudget" /></label>
+                  <div class="admin-inline-actions">
+                    <button class="btn btn--primary" type="submit">Save Campaign</button>
+                  </div>
+                </form>
+                <div class="admin-list" data-fb-ads-list></div>
+              </div>
+              <div class="admin-block">
+                <h3 class="h3">Live Media Manager</h3>
+                <form class="admin-form" data-fb-media-form>
+                  <label class="admin-field"><span>Title</span><input id="fbMediaTitle" required /></label>
+                  <label class="admin-field"><span>Category</span><input id="fbMediaCategory" required /></label>
+                  <label class="admin-field"><span>File Upload</span><input id="fbMediaFile" type="file" accept="image/*,video/*" required /></label>
+                  <div class="admin-inline-actions">
+                    <button class="btn btn--primary" type="submit">Upload Media</button>
+                  </div>
+                </form>
+                <div class="admin-list" data-fb-media-list></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card admin-panel" id="hero-settings">
+            <div class="admin-panel__head">
+              <h2 class="h3">Hero Settings</h2>
+              <div class="admin-inline-actions">
+                <button class="btn btn--primary" type="button" data-admin-action="save-hero-settings">Save Hero</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="load-hero-settings">Load Hero</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="reset-hero-settings">Reset Hero</button>
+              </div>
+            </div>
+
+            <div class="admin-block">
+              <div class="admin-form">
+                <label class="admin-field">
+                  <span>Hero Title</span>
+                  <input id="adminHeroTitle" type="text" value="The Rising Bihar, The Growing Bihar" />
+                </label>
+                <label class="admin-field">
+                  <span>Hero Subtitle</span>
+                  <input id="adminHeroSubtitle" type="text" value="Discover landmarks, festivals, cuisine, stories, and trusted local businesses - curated for tourists, locals, students, and partners." />
+                </label>
+                <div class="admin-grid admin-grid--2">
+                  <label class="admin-field">
+                    <span>Primary Button</span>
+                    <input id="adminHeroCtaPrimary" type="text" value="Explore Bihar" />
+                  </label>
+                  <label class="admin-field">
+                    <span>Secondary Button</span>
+                    <input id="adminHeroCtaSecondary" type="text" value="List Your Business" />
+                  </label>
+                </div>
+                <label class="admin-field">
+                  <span>Search Placeholder</span>
+                  <input id="adminSearchPlaceholder" type="text" value="Search places, businesses, events, guides..." />
+                </label>
+              </div>
+            </div>
+          </article>
+
+          <article class="card admin-panel" id="explore-settings">
+            <div class="admin-panel__head">
+              <h2 class="h3">Explore Bihar Settings</h2>
+              <div class="admin-inline-actions">
+                <button class="btn btn--primary" type="button" data-admin-action="save-explore-settings">Save Explore</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="load-explore-settings">Load Explore</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="reset-explore-settings">Reset Explore</button>
+              </div>
+            </div>
+            <div class="admin-block">
+              <div class="admin-form">
+                <label class="admin-field">
+                  <span>Explore Title</span>
+                  <input id="adminExploreTitle" type="text" value="Top Favorite Destinations in Bihar" />
+                </label>
+                <label class="admin-field">
+                  <span>Explore Subtitle</span>
+                  <input id="adminExploreSubtitle" type="text" value="Handpicked places across Bihar for heritage lovers, cultural explorers, and first-time travelers." />
+                </label>
+                <div class="admin-grid admin-grid--3">
+                  <label class="admin-field">
+                    <span>Category 1</span>
+                    <input id="adminCatAll" type="text" value="All" />
+                  </label>
+                  <label class="admin-field">
+                    <span>Category 2</span>
+                    <input id="adminCatLandmarks" type="text" value="Landmarks" />
+                  </label>
+                  <label class="admin-field">
+                    <span>Category 3</span>
+                    <input id="adminCatFestivals" type="text" value="Festivals" />
+                  </label>
+                </div>
+                <div class="admin-grid admin-grid--3">
+                  <label class="admin-field">
+                    <span>Category 4</span>
+                    <input id="adminCatCuisine" type="text" value="Cuisine" />
+                  </label>
+                  <label class="admin-field">
+                    <span>Category 5</span>
+                    <input id="adminCatCulture" type="text" value="Culture" />
+                  </label>
+                  <label class="admin-field">
+                    <span>Category 6</span>
+                    <input id="adminCatSpiritual" type="text" value="Spiritual" />
+                  </label>
+                </div>
+                <label class="admin-field">
+                  <span>Category 7</span>
+                  <input id="adminCatWildlife" type="text" value="Wildlife" />
+                </label>
+              </div>
+            </div>
+            <div class="admin-block" style="margin-top:10px;">
+              <h3 class="h3">Add Explore Card (Photo + Title)</h3>
+              <div class="admin-grid admin-grid--3">
+                <label class="admin-field">
+                  <span>Place Title</span>
+                  <input id="adminExploreCardTitle" type="text" placeholder="e.g., Kesaria Stupa" />
+                </label>
+                <label class="admin-field">
+                  <span>Category</span>
+                  <select id="adminExploreCardCategory">
+                    <option value="landmarks">Landmarks</option>
+                    <option value="festivals">Festivals</option>
+                    <option value="cuisine">Cuisine</option>
+                    <option value="culture">Culture</option>
+                  </select>
+                </label>
+                <label class="admin-field">
+                  <span>Image URL</span>
+                  <input id="adminExploreCardImage" type="url" placeholder="https://..." />
+                </label>
+              </div>
+              <div class="admin-inline-actions" style="margin-top:10px;">
+                <button class="btn btn--primary" type="button" data-admin-action="add-explore-card">Add Explore Card</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="clear-explore-cards">Clear All Explore Cards</button>
+              </div>
+              <div class="admin-list" data-explore-custom-list></div>
+            </div>
+          </article>
+
+          <article class="card admin-panel" id="blog-settings">
+            <div class="admin-panel__head">
+              <h2 class="h3">Blog Settings</h2>
+              <div class="admin-inline-actions">
+                <button class="btn btn--primary" type="button" data-admin-action="save-blog-settings">Save Blog</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="load-blog-settings">Load Blog</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="reset-blog-settings">Reset Blog</button>
+              </div>
+            </div>
+            <div class="admin-block">
+              <div class="admin-form">
+                <label class="admin-field">
+                  <span>Blog Title</span>
+                  <input id="adminBlogTitle" type="text" value="Blog" />
+                </label>
+                <label class="admin-field">
+                  <span>Blog Subtitle</span>
+                  <input id="adminBlogSubtitle" type="text" value="Articles by category, featured stories, and latest Bihar updates." />
+                </label>
+              </div>
+            </div>
+          </article>
+
+          <article class="card admin-panel" id="media-integration-settings">
+            <div class="admin-panel__head">
+              <h2 class="h3">Media Integration Settings</h2>
+              <div class="admin-inline-actions">
+                <button class="btn btn--primary" type="button" data-admin-action="save-media-integration-settings">Save Media</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="load-media-integration-settings">Load Media</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="reset-media-integration-settings">Reset Media</button>
+              </div>
+            </div>
+            <div class="admin-block">
+              <div class="admin-form">
+                <label class="admin-field">
+                  <span>Media Section Title</span>
+                  <input id="adminMediaTitle" type="text" value="Media Integration" />
+                </label>
+                <label class="admin-field">
+                  <span>Media Section Subtitle</span>
+                  <input id="adminMediaSubtitle" type="text" value="YouTube embedding, Instagram reel-style showcase, and muted autoplay support." />
+                </label>
+                <label class="admin-field">
+                  <span>YouTube Video URL</span>
+                  <input id="adminMediaYoutubeUrl" type="url" value="https://www.youtube.com/watch?v=vUbjMRUI_Cs" />
+                </label>
+                <label class="admin-field">
+                  <span>YouTube Video Title (Below Video)</span>
+                  <input id="adminMediaYoutubeTitle" type="text" value="The Rising Bihar, The Growing Bihar" />
+                </label>
+                <div class="admin-grid admin-grid--3">
+                  <label class="admin-field">
+                    <span>Instagram Reel 1</span>
+                    <input id="adminMediaInsta1" type="url" value="https://www.instagram.com/p/DVBY0SNiVoR/" />
+                  </label>
+                  <label class="admin-field">
+                    <span>Instagram Reel 2</span>
+                    <input id="adminMediaInsta2" type="url" value="https://www.instagram.com/p/DU_BG4MCeoy/" />
+                  </label>
+                  <label class="admin-field">
+                    <span>Instagram Reel 3</span>
+                    <input id="adminMediaInsta3" type="url" value="https://www.instagram.com/p/DU8L3PZCd8T/" />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card admin-panel" id="contact-settings">
+            <div class="admin-panel__head">
+              <h2 class="h3">Contact Settings</h2>
+              <div class="admin-inline-actions">
+                <button class="btn btn--primary" type="button" data-admin-action="save-contact-settings">Save Contact</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="load-contact-settings">Load Contact</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="reset-contact-settings">Reset Contact</button>
+              </div>
+            </div>
+
+            <div class="admin-block">
+              <div class="admin-form">
+                <label class="admin-field">
+                  <span>Support Email</span>
+                  <input id="adminSupportEmail" type="email" value="hello@biharvihaan.com" />
+                </label>
+                <label class="admin-field">
+                  <span>Support Phone</span>
+                  <input id="adminSupportPhone" type="text" value="+91 94300 41925" />
+                </label>
+                <label class="admin-field">
+                  <span>Office Location</span>
+                  <input id="adminOfficeLocation" type="text" value="Patna, Bihar" />
+                </label>
+              </div>
+            </div>
+          </article>
+
+          <article class="card admin-panel" id="visibility-settings">
+            <div class="admin-panel__head">
+              <h2 class="h3">Section Visibility</h2>
+              <div class="admin-inline-actions">
+                <button class="btn btn--primary" type="button" data-admin-action="save-visibility-settings">Save Visibility</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="load-visibility-settings">Load Visibility</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="reset-visibility-settings">Reset Visibility</button>
+              </div>
+            </div>
+
+            <div class="admin-grid admin-grid--2">
+              <div class="admin-block">
+                <div class="admin-checklist">
+                  <label class="admin-switch"><input id="adminShowServices" type="checkbox" checked /> Show Services section</label>
+                  <label class="admin-switch"><input id="adminShowBlog" type="checkbox" checked /> Show Blog section</label>
+                  <label class="admin-switch"><input id="adminShowMedia" type="checkbox" checked /> Show Media section</label>
+                </div>
+              </div>
+              <div class="admin-block">
+                <h3 class="h3">Open Pages</h3>
+                <div class="admin-inline-actions">
+                  <button class="btn btn--soft" type="button" data-admin-action="open-homepage">Open Homepage</button>
+                  <button class="btn btn--soft" type="button" data-admin-action="open-media-page">Open Media Gallery</button>
+                  <button class="btn btn--soft" type="button" data-admin-action="open-blog-section">Open Blog Section</button>
+                </div>
+                <div class="admin-inline-actions" style="margin-top:10px;">
+                  <button class="btn btn--ghost" type="button" data-admin-action="clear-site-settings">Clear All Saved Settings</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card admin-panel" id="role-access">
+            <div class="admin-panel__head">
+              <h2 class="h3">Roles & Access Control</h2>
+              <div class="admin-inline-actions">
+                <button class="btn btn--soft" type="button">Invite User</button>
+                <button class="btn btn--ghost" type="button">Export Roles</button>
+              </div>
+            </div>
+
+            <div class="admin-grid admin-grid--2">
+              <div class="admin-block">
+                <h3 class="h3">Core Admin Roles</h3>
+                <div class="admin-list">
+                  <div class="admin-item"><strong>Super Admin</strong><span class="muted">Full system control. Manage admins and all users. Access all settings and analytics. Delete or modify any content.</span></div>
+                  <div class="admin-item"><strong>Admin</strong><span class="muted">Manage users (except Super Admin). Manage content and media. Approve or reject posts. Manage website settings.</span></div>
+                  <div class="admin-item"><strong>Moderator</strong><span class="muted">Approve or reject comments and posts. Remove spam or inappropriate content. Flag users if needed.</span></div>
+                  <div class="admin-item"><strong>Editor</strong><span class="muted">Edit and publish content. Manage categories and tags. Update existing posts.</span></div>
+                  <div class="admin-item"><strong>Author</strong><span class="muted">Create and publish own posts. Edit own content only.</span></div>
+                  <div class="admin-item"><strong>Contributor</strong><span class="muted">Create content and submit for approval. Cannot publish directly.</span></div>
+                </div>
+              </div>
+
+              <div class="admin-block">
+                <h3 class="h3">Support Roles</h3>
+                <div class="admin-list">
+                  <div class="admin-item"><strong>SEO Manager</strong><span class="muted">Edit meta tags, titles, and descriptions. Manage sitemap and keywords. Monitor SEO performance.</span></div>
+                  <div class="admin-item"><strong>Content Manager</strong><span class="muted">Upload and manage media files. Organize blogs and galleries. Schedule content publishing.</span></div>
+                  <div class="admin-item"><strong>Support Agent</strong><span class="muted">Respond to user queries. Manage contact form messages. Handle complaints and feedback.</span></div>
+                  <div class="admin-item"><strong>Analyst</strong><span class="muted">View traffic and performance reports. Access analytics dashboard. Export reports (read-only).</span></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card admin-panel" id="blog-posts">
+            <div class="admin-panel__head">
+              <h2 class="h3">Blog & Posts Manager</h2>
+              <div class="admin-inline-actions">
+                <button class="btn btn--soft" type="button" data-admin-action="add-blog-post">Create Post</button>
+                <button class="btn btn--ghost" type="button">Bulk Category Update</button>
+              </div>
+            </div>
+            <div class="admin-block" style="margin-bottom:10px;">
+              <div class="admin-grid admin-grid--3">
+                <label class="admin-field">
+                  <span>Post Title</span>
+                  <input id="adminPostTitle" type="text" placeholder="Post title" />
+                </label>
+                <label class="admin-field">
+                  <span>Category</span>
+                  <select id="adminPostCategory">
+                    <option>Tourism</option>
+                    <option>Culture</option>
+                    <option>Local News</option>
+                    <option>Business</option>
+                    <option>Food</option>
+                    <option>Spiritual</option>
+                    <option>Education</option>
+                    <option>History</option>
+                  </select>
+                </label>
+                <label class="admin-field">
+                  <span>Post Link URL</span>
+                  <input id="adminPostUrl" type="text" placeholder="blog-new-post.html or full URL" />
+                </label>
+              </div>
+              <div class="admin-grid admin-grid--2">
+                <label class="admin-field">
+                  <span>Excerpt</span>
+                  <input id="adminPostExcerpt" type="text" placeholder="Short summary for card..." />
+                </label>
+                <label class="admin-field">
+                  <span>Cover Image URL</span>
+                  <input id="adminPostImage" type="url" placeholder="https://..." />
+                </label>
+              </div>
+              <label class="admin-field">
+                <span>Tags (comma separated)</span>
+                <input id="adminPostTags" type="text" placeholder="heritage, itinerary, food" />
+              </label>
+              <div class="admin-inline-actions">
+                <button class="btn btn--primary" type="button" data-admin-action="add-blog-post">Add Blog Post</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="clear-blog-posts">Clear Added Posts</button>
+              </div>
+              <div class="admin-list" data-blog-custom-list></div>
+            </div>
+            <div class="admin-toolbar">
+              <input class="admin-search" type="search" placeholder="Search post by title, author, or tag..." />
+              <button class="btn btn--ghost" type="button">Filter by Category</button>
+              <button class="btn btn--ghost" type="button">Filter by Status</button>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr><th>Title</th><th>Category</th><th>Author</th><th>Date</th><th>Status</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>A Weekend in Patna</td><td>Tourism</td><td>Kaushik Gupta</td><td>20 Feb 2026</td><td><span class="status status--ok">Published</span></td><td><button class="btn btn--ghost" type="button">Edit</button></td></tr>
+                  <tr><td>Madhubani: Art that Speaks</td><td>Culture</td><td>Priyanshu Kumar</td><td>19 Feb 2026</td><td><span class="status status--ok">Published</span></td><td><button class="btn btn--ghost" type="button">Edit</button></td></tr>
+                  <tr><td>Bihar Startup Spotlight</td><td>Business</td><td>Vikash Kumar</td><td>26 Feb 2026</td><td><span class="status status--warn">Scheduled</span></td><td><button class="btn btn--ghost" type="button">Edit</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="card admin-panel" id="team-manager">
+            <div class="admin-panel__head">
+              <h2 class="h3">Our Team Manager</h2>
+              <div class="admin-inline-actions">
+                <button class="btn btn--primary" type="button" data-admin-action="add-team-member">Add Member</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="save-team-member-edit" data-team-mode="edit" style="display:none;">Update Member</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="cancel-team-member-edit" data-team-mode="edit" style="display:none;">Cancel Edit</button>
+                <button class="btn btn--ghost" type="button" data-admin-action="reset-team-members">Reset Team</button>
+              </div>
+            </div>
+            <div class="admin-block">
+              <div class="admin-grid admin-grid--3">
+                <label class="admin-field">
+                  <span>Member Name</span>
+                  <input id="adminTeamMemberName" type="text" placeholder="e.g., Kaushik Gupta" />
+                </label>
+                <label class="admin-field">
+                  <span>Role</span>
+                  <input id="adminTeamMemberRole" type="text" placeholder="e.g., Website Developer" />
+                </label>
+                <label class="admin-field">
+                  <span>Photo URL</span>
+                  <input id="adminTeamMemberPhoto" type="url" placeholder="https://..." />
+                </label>
+              </div>
+              <input id="adminTeamEditId" type="hidden" />
+              <p class="muted">Add/edit team members and profile photos for the homepage About section.</p>
+              <div class="admin-list" data-team-custom-list></div>
+            </div>
+          </article>
+
+          <article class="card admin-panel" id="video-media">
+            <div class="admin-panel__head">
+              <h2 class="h3">Video & Media Manager</h2>
+              <div class="admin-inline-actions">
+                <button class="btn btn--soft" type="button">Upload / Link Media</button>
+                <button class="btn btn--ghost" type="button">Test Connections</button>
+              </div>
+            </div>
+            <div class="admin-grid admin-grid--3">
+              <label class="admin-field">
+                <span>YouTube Feature URL</span>
+                <input type="url" value="https://www.youtube.com/watch?v=vUbjMRUI_Cs" />
+              </label>
+              <label class="admin-field">
+                <span>Instagram Reel URL 1</span>
+                <input type="url" value="https://www.instagram.com/p/DVBY0SNiVoR/" />
+              </label>
+              <label class="admin-field">
+                <span>Instagram Reel URL 2</span>
+                <input type="url" value="https://www.instagram.com/p/DU8L3PZCd8T/" />
+              </label>
+            </div>
+            <div class="admin-checklist">
+              <label class="admin-switch"><input type="checkbox" checked /> Enable YouTube autoplay (muted)</label>
+              <label class="admin-switch"><input type="checkbox" checked /> Load Instagram embed script</label>
+              <label class="admin-switch"><input type="checkbox" checked /> Enable moderation queue</label>
+            </div>
+            <div class="admin-block" style="margin-top:10px;">
+              <h3 class="h3">Contribute your photo/video</h3>
+              <div class="admin-form">
+                <label class="admin-field">
+                  <span>Title</span>
+                  <input id="adminMediaContribTitle" type="text" placeholder="e.g., Chhath Puja at Ganga Ghat" />
+                </label>
+                <label class="admin-field">
+                  <span>Category</span>
+                  <select id="adminMediaContribCategory">
+                    <option value="">Select...</option>
+                    <option>Landmarks</option>
+                    <option>Festivals</option>
+                    <option>Cuisine</option>
+                    <option>Culture</option>
+                  </select>
+                </label>
+                <label class="admin-field">
+                  <span>Upload</span>
+                  <input id="adminMediaContribFile" type="file" accept="image/*,video/*" />
+                </label>
+                <div class="admin-inline-actions">
+                  <button class="btn btn--primary" type="button" data-admin-action="add-media-submission">Submit</button>
+                  <button class="btn btn--ghost" type="button" data-admin-action="clear-media-submissions">Clear Submitted</button>
+                </div>
+                <p class="muted">Live mode stores files in Firebase Storage and records moderation data in Firestore.</p>
+                <div class="admin-list" data-media-custom-list></div>
+              </div>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr><th>Media Item</th><th>Type</th><th>Status</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Festival Reel Submission</td><td>Instagram Reel</td><td><span class="status status--warn">Pending</span></td><td><button class="btn btn--ghost" type="button">Approve</button></td></tr>
+                  <tr><td>Tourism Promo Clip</td><td>YouTube Video</td><td><span class="status status--ok">Live</span></td><td><button class="btn btn--ghost" type="button">Edit</button></td></tr>
+                  <tr><td>Cultural Clip Batch</td><td>Shorts</td><td><span class="status">Draft</span></td><td><button class="btn btn--ghost" type="button">Edit</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="card admin-panel" id="ads-manager">
+            <div class="admin-panel__head">
+              <h2 class="h3">Ads Manager</h2>
+              <div class="admin-inline-actions">
+                <button class="btn btn--soft" type="button">Create Campaign</button>
+                <button class="btn btn--ghost" type="button">Export Leads</button>
+              </div>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr><th>Campaign</th><th>Placement</th><th>Budget</th><th>CTR</th><th>Status</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Patna Hotel Push</td><td>Homepage Hero Banner</td><td>₹25,000</td><td>2.8%</td><td><span class="status status--ok">Running</span></td><td><button class="btn btn--ghost" type="button">Edit</button></td></tr>
+                  <tr><td>Madhubani Fest</td><td>Media Gallery + Reels</td><td>₹18,000</td><td>1.9%</td><td><span class="status status--warn">Optimizing</span></td><td><button class="btn btn--ghost" type="button">Edit</button></td></tr>
+                  <tr><td>Local Shop Drive</td><td>Directory Listing</td><td>₹9,500</td><td>1.2%</td><td><span class="status">Paused</span></td><td><button class="btn btn--ghost" type="button">Edit</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div class="admin-toast" data-admin-toast role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      const tabs = Array.from(document.querySelectorAll('[data-admin-tabs] .admin-tab'));
+      const toast = document.querySelector('[data-admin-toast]');
+
+      const notify = (message, kind = 'ok') => {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.remove('is-ok', 'is-warn', 'is-open');
+        toast.classList.add(kind === 'warn' ? 'is-warn' : 'is-ok', 'is-open');
+        window.clearTimeout(notify._timer);
+        notify._timer = window.setTimeout(() => toast.classList.remove('is-open'), 2200);
+      };
+
+      if (tabs.length) {
+        const setActive = () => {
+          const hash = window.location.hash || '#overview';
+          tabs.forEach((tab) => tab.classList.toggle('is-active', tab.getAttribute('href') === hash));
+        };
+        window.addEventListener('hashchange', setActive);
+        setActive();
+      }
+
+      const downloadFile = (filename, content, mime = 'text/plain;charset=utf-8') => {
+        const blob = new Blob([content], { type: mime });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      };
+      const SITE_SETTINGS_KEY = 'bv_site_settings_v1';
+      const CUSTOM_EXPLORE_KEY = 'bv_custom_explore_tiles_v1';
+      const CUSTOM_POSTS_KEY = 'bv_custom_blog_posts_v1';
+      const CUSTOM_MEDIA_KEY = 'bv_custom_media_submissions_v1';
+      const CUSTOM_TEAM_KEY = 'bv_custom_team_members_v1';
+      const defaultTeamMembers = [
+        {
+          id: 'team-1',
+          name: 'Kaushik Gupta',
+          role: 'Website Developer',
+          image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          id: 'team-2',
+          name: 'Priyanshu Kumar',
+          role: 'Social Media Manager',
+          image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          id: 'team-3',
+          name: 'Vikash Kumar',
+          role: 'Video Journalist',
+          image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          id: 'team-4',
+          name: 'Anjali Kumari',
+          role: 'Content Strategist',
+          image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          id: 'team-5',
+          name: 'Rohit Raj',
+          role: 'Graphic Designer',
+          image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80'
+        },
+        {
+          id: 'team-6',
+          name: 'Sneha Singh',
+          role: 'Operations Coordinator',
+          image: 'https://images.unsplash.com/photo-1541534401786-2077eed87a72?auto=format&fit=crop&w=400&q=80'
+        }
+      ];
+      const defaults = {
+        heroTitle: 'The Rising Bihar, The Growing Bihar',
+        heroSubtitle: 'Discover landmarks, festivals, cuisine, stories, and trusted local businesses - curated for tourists, locals, students, and partners.',
+        ctaPrimary: 'Explore Bihar',
+        ctaSecondary: 'List Your Business',
+        searchPlaceholder: 'Search places, businesses, events, guides...',
+        exploreTitle: 'Top Favorite Destinations in Bihar',
+        exploreSubtitle: 'Handpicked places across Bihar for heritage lovers, cultural explorers, and first-time travelers.',
+        catAll: 'All',
+        catLandmarks: 'Landmarks',
+        catFestivals: 'Festivals',
+        catCuisine: 'Cuisine',
+        catCulture: 'Culture',
+        catSpiritual: 'Spiritual',
+        catWildlife: 'Wildlife',
+        blogTitle: 'Blog',
+        blogSubtitle: 'Articles by category, featured stories, and latest Bihar updates.',
+        mediaTitle: 'Media Integration',
+        mediaSubtitle: 'YouTube embedding, Instagram reel-style showcase, and muted autoplay support.',
+        mediaYoutubeUrl: 'https://www.youtube.com/watch?v=vUbjMRUI_Cs',
+        mediaYoutubeTitle: 'The Rising Bihar, The Growing Bihar',
+        mediaInsta1: 'https://www.instagram.com/p/DVBY0SNiVoR/',
+        mediaInsta2: 'https://www.instagram.com/p/DU_BG4MCeoy/',
+        mediaInsta3: 'https://www.instagram.com/p/DU8L3PZCd8T/',
+        supportEmail: 'hello@biharvihaan.com',
+        supportPhone: '+91 94300 41925',
+        officeLocation: 'Patna, Bihar',
+        showServices: true,
+        showBlog: true,
+        showMedia: true
+      };
+      const byId = (id) => document.getElementById(id);
+      const fieldIds = {
+        heroTitle: 'adminHeroTitle',
+        heroSubtitle: 'adminHeroSubtitle',
+        ctaPrimary: 'adminHeroCtaPrimary',
+        ctaSecondary: 'adminHeroCtaSecondary',
+        searchPlaceholder: 'adminSearchPlaceholder',
+        exploreTitle: 'adminExploreTitle',
+        exploreSubtitle: 'adminExploreSubtitle',
+        catAll: 'adminCatAll',
+        catLandmarks: 'adminCatLandmarks',
+        catFestivals: 'adminCatFestivals',
+        catCuisine: 'adminCatCuisine',
+        catCulture: 'adminCatCulture',
+        catSpiritual: 'adminCatSpiritual',
+        catWildlife: 'adminCatWildlife',
+        blogTitle: 'adminBlogTitle',
+        blogSubtitle: 'adminBlogSubtitle',
+        mediaTitle: 'adminMediaTitle',
+        mediaSubtitle: 'adminMediaSubtitle',
+        mediaYoutubeUrl: 'adminMediaYoutubeUrl',
+        mediaYoutubeTitle: 'adminMediaYoutubeTitle',
+        mediaInsta1: 'adminMediaInsta1',
+        mediaInsta2: 'adminMediaInsta2',
+        mediaInsta3: 'adminMediaInsta3',
+        supportEmail: 'adminSupportEmail',
+        supportPhone: 'adminSupportPhone',
+        officeLocation: 'adminOfficeLocation',
+        showServices: 'adminShowServices',
+        showBlog: 'adminShowBlog',
+        showMedia: 'adminShowMedia'
+      };
+      const readStored = () => {
+        try {
+          const raw = window.localStorage.getItem(SITE_SETTINGS_KEY);
+          const parsed = raw ? JSON.parse(raw) : {};
+          return { ...defaults, ...(parsed || {}) };
+        } catch (_) {
+          return { ...defaults };
+        }
+      };
+      const fillForm = (settings) => {
+        Object.entries(fieldIds).forEach(([key, id]) => {
+          const el = byId(id);
+          if (!el) return;
+          if (el.type === 'checkbox') {
+            el.checked = Boolean(settings[key]);
+          } else {
+            el.value = settings[key] ?? '';
+          }
+        });
+      };
+      const collectForm = () => {
+        const out = {};
+        Object.entries(fieldIds).forEach(([key, id]) => {
+          const el = byId(id);
+          if (!el) return;
+          out[key] = el.type === 'checkbox' ? Boolean(el.checked) : String(el.value || '').trim();
+        });
+        return { ...defaults, ...out };
+      };
+      const readField = (key) => {
+        const id = fieldIds[key];
+        const el = byId(id);
+        if (!el) return defaults[key];
+        return el.type === 'checkbox' ? Boolean(el.checked) : String(el.value || '').trim();
+      };
+      const writeStored = (patch) => {
+        try {
+          const merged = { ...readStored(), ...patch };
+          window.localStorage.setItem(SITE_SETTINGS_KEY, JSON.stringify(merged));
+          return true;
+        } catch (_) {
+          return false;
+        }
+      };
+      const readArray = (key) => {
+        try {
+          const raw = window.localStorage.getItem(key);
+          const parsed = raw ? JSON.parse(raw) : [];
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (_) {
+          return [];
+        }
+      };
+      const writeArray = (key, arr) => {
+        try {
+          window.localStorage.setItem(key, JSON.stringify(arr));
+          return true;
+        } catch (_) {
+          return false;
+        }
+      };
+      const safeUrl = (value) => {
+        const raw = String(value || '').trim();
+        if (!raw) return '';
+        try {
+          const u = new URL(raw, window.location.origin);
+          if (!['http:', 'https:'].includes(u.protocol)) return '';
+          return u.toString();
+        } catch (_) {
+          return '';
+        }
+      };
+      const renderExploreCustomList = () => {
+        const wrap = document.querySelector('[data-explore-custom-list]');
+        if (!wrap) return;
+        const items = readArray(CUSTOM_EXPLORE_KEY);
+        if (!items.length) {
+          wrap.innerHTML = '<p class="muted">No custom explore cards added yet.</p>';
+          return;
+        }
+        wrap.innerHTML = items
+          .map((x) => `<div class="admin-item"><strong>${escapeHtml(x.title)}</strong><span class="muted">${escapeHtml(x.category)}</span><button class="btn btn--ghost" type="button" data-admin-action="delete-explore-card" data-item-id="${escapeHtml(x.id)}">Delete</button></div>`)
+          .join('');
+      };
+      const renderBlogCustomList = () => {
+        const wrap = document.querySelector('[data-blog-custom-list]');
+        if (!wrap) return;
+        const items = readArray(CUSTOM_POSTS_KEY);
+        if (!items.length) {
+          wrap.innerHTML = '<p class="muted">No custom blog posts added yet.</p>';
+          return;
+        }
+        wrap.innerHTML = items
+          .map((x) => `<div class="admin-item"><strong>${escapeHtml(x.title)}</strong><span class="muted">${escapeHtml(x.category)}</span><button class="btn btn--ghost" type="button" data-admin-action="delete-blog-post" data-item-id="${escapeHtml(x.id)}">Delete</button></div>`)
+          .join('');
+      };
+      const renderMediaCustomList = () => {
+        const wrap = document.querySelector('[data-media-custom-list]');
+        if (!wrap) return;
+        const items = readArray(CUSTOM_MEDIA_KEY);
+        if (!items.length) {
+          wrap.innerHTML = '<p class="muted">No media submissions yet.</p>';
+          return;
+        }
+        wrap.innerHTML = items
+          .map((x) => `<div class="admin-item"><strong>${escapeHtml(x.title)}</strong><span class="muted">${escapeHtml(x.category)} · ${escapeHtml(x.fileName || 'No file')}</span><button class="btn btn--ghost" type="button" data-admin-action="delete-media-submission" data-item-id="${escapeHtml(x.id)}">Delete</button></div>`)
+          .join('');
+      };
+      const readTeamMembers = () => {
+        const saved = readArray(CUSTOM_TEAM_KEY);
+        return saved.length ? saved : defaultTeamMembers;
+      };
+      const clearTeamForm = () => {
+        const editId = byId('adminTeamEditId');
+        const name = byId('adminTeamMemberName');
+        const role = byId('adminTeamMemberRole');
+        const photo = byId('adminTeamMemberPhoto');
+        if (editId) editId.value = '';
+        if (name) name.value = '';
+        if (role) role.value = '';
+        if (photo) photo.value = '';
+      };
+      const setTeamEditMode = (isEdit) => {
+        document.querySelectorAll('[data-team-mode="edit"]').forEach((btn) => {
+          btn.style.display = isEdit ? '' : 'none';
+        });
+      };
+      const escapeHtml = (value) =>
+        String(value || '')
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#039;');
+      const renderTeamCustomList = () => {
+        const wrap = document.querySelector('[data-team-custom-list]');
+        if (!wrap) return;
+        const items = readTeamMembers();
+        if (!items.length) {
+          wrap.innerHTML = '<p class="muted">No team members found.</p>';
+          return;
+        }
+        wrap.innerHTML = items
+          .map(
+            (x) => `
+              <div class="admin-item">
+                <strong>${escapeHtml(x.name)}</strong>
+                <span class="muted">${escapeHtml(x.role)}</span>
+                <div class="admin-inline-actions">
+                  <button class="btn btn--ghost" type="button" data-admin-action="start-edit-team-member" data-item-id="${escapeHtml(x.id)}">Edit</button>
+                  <button class="btn btn--ghost" type="button" data-admin-action="delete-team-member" data-item-id="${escapeHtml(x.id)}">Delete</button>
+                </div>
+              </div>
+            `
+          )
+          .join('');
+      };
+      fillForm(readStored());
+      renderExploreCustomList();
+      renderBlogCustomList();
+      renderMediaCustomList();
+      renderTeamCustomList();
+      clearTeamForm();
+      setTeamEditMode(false);
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[type="button"]');
+        if (!btn) return;
+
+        const action = btn.getAttribute('data-admin-action');
+        if (action === 'save-hero-settings') {
+          const ok = writeStored({
+            heroTitle: readField('heroTitle'),
+            heroSubtitle: readField('heroSubtitle'),
+            ctaPrimary: readField('ctaPrimary'),
+            ctaSecondary: readField('ctaSecondary'),
+            searchPlaceholder: readField('searchPlaceholder')
+          });
+          notify(ok ? 'Hero settings saved.' : 'Hero settings save failed.', ok ? 'ok' : 'warn');
+          return;
+        }
+        if (action === 'add-explore-card') {
+          const title = String(byId('adminExploreCardTitle')?.value || '').trim();
+          const category = String(byId('adminExploreCardCategory')?.value || 'culture').trim().toLowerCase();
+          const image = safeUrl(byId('adminExploreCardImage')?.value);
+          if (!title || !image) {
+            notify('Explore card ke liye Title aur Image URL required hai.', 'warn');
+            return;
+          }
+          const items = readArray(CUSTOM_EXPLORE_KEY);
+          items.unshift({ id: String(Date.now()), title, category, image });
+          if (!writeArray(CUSTOM_EXPLORE_KEY, items)) {
+            notify('Explore card save failed.', 'warn');
+            return;
+          }
+          byId('adminExploreCardTitle').value = '';
+          byId('adminExploreCardImage').value = '';
+          renderExploreCustomList();
+          notify('Explore card added successfully.');
+          return;
+        }
+        if (action === 'clear-explore-cards') {
+          writeArray(CUSTOM_EXPLORE_KEY, []);
+          renderExploreCustomList();
+          notify('All custom explore cards cleared.');
+          return;
+        }
+        if (action === 'delete-explore-card') {
+          const id = btn.getAttribute('data-item-id');
+          const next = readArray(CUSTOM_EXPLORE_KEY).filter((x) => x.id !== id);
+          writeArray(CUSTOM_EXPLORE_KEY, next);
+          renderExploreCustomList();
+          notify('Explore card deleted.');
+          return;
+        }
+        if (action === 'add-blog-post') {
+          const title = String(byId('adminPostTitle')?.value || '').trim();
+          const category = String(byId('adminPostCategory')?.value || 'Tourism').trim();
+          const excerpt = String(byId('adminPostExcerpt')?.value || '').trim();
+          const image = safeUrl(byId('adminPostImage')?.value);
+          const url = safeUrl(byId('adminPostUrl')?.value) || String(byId('adminPostUrl')?.value || '').trim();
+          const tagsRaw = String(byId('adminPostTags')?.value || '').trim();
+          if (!title || !excerpt || !image) {
+            notify('Blog post ke liye Title, Excerpt aur Image URL required hai.', 'warn');
+            return;
+          }
+          const tags = tagsRaw ? tagsRaw.split(',').map((x) => x.trim()).filter(Boolean) : ['bihar'];
+          const items = readArray(CUSTOM_POSTS_KEY);
+          items.unshift({ id: String(Date.now()), title, category, excerpt, image, url, tags });
+          if (!writeArray(CUSTOM_POSTS_KEY, items)) {
+            notify('Blog post save failed.', 'warn');
+            return;
+          }
+          ['adminPostTitle', 'adminPostExcerpt', 'adminPostImage', 'adminPostUrl', 'adminPostTags'].forEach((id) => {
+            const el = byId(id);
+            if (el) el.value = '';
+          });
+          renderBlogCustomList();
+          notify('Blog post added successfully.');
+          return;
+        }
+        if (action === 'clear-blog-posts') {
+          writeArray(CUSTOM_POSTS_KEY, []);
+          renderBlogCustomList();
+          notify('All custom blog posts cleared.');
+          return;
+        }
+        if (action === 'delete-blog-post') {
+          const id = btn.getAttribute('data-item-id');
+          const next = readArray(CUSTOM_POSTS_KEY).filter((x) => x.id !== id);
+          writeArray(CUSTOM_POSTS_KEY, next);
+          renderBlogCustomList();
+          notify('Blog post deleted.');
+          return;
+        }
+        if (action === 'add-media-submission') {
+          const title = String(byId('adminMediaContribTitle')?.value || '').trim();
+          const category = String(byId('adminMediaContribCategory')?.value || '').trim();
+          const fileInput = byId('adminMediaContribFile');
+          const fileName = fileInput?.files?.[0]?.name || '';
+          if (!title || !category) {
+            notify('Media submission ke liye Title aur Category required hai.', 'warn');
+            return;
+          }
+          const items = readArray(CUSTOM_MEDIA_KEY);
+          items.unshift({ id: String(Date.now()), title, category, fileName });
+          if (!writeArray(CUSTOM_MEDIA_KEY, items)) {
+            notify('Media submission save failed.', 'warn');
+            return;
+          }
+          byId('adminMediaContribTitle').value = '';
+          byId('adminMediaContribCategory').value = '';
+          if (fileInput) fileInput.value = '';
+          renderMediaCustomList();
+          notify('Media submission added.');
+          return;
+        }
+        if (action === 'clear-media-submissions') {
+          writeArray(CUSTOM_MEDIA_KEY, []);
+          renderMediaCustomList();
+          notify('All media submissions cleared.');
+          return;
+        }
+        if (action === 'delete-media-submission') {
+          const id = btn.getAttribute('data-item-id');
+          const next = readArray(CUSTOM_MEDIA_KEY).filter((x) => x.id !== id);
+          writeArray(CUSTOM_MEDIA_KEY, next);
+          renderMediaCustomList();
+          notify('Media submission deleted.');
+          return;
+        }
+        if (action === 'add-team-member') {
+          const name = String(byId('adminTeamMemberName')?.value || '').trim();
+          const role = String(byId('adminTeamMemberRole')?.value || '').trim();
+          const image = safeUrl(byId('adminTeamMemberPhoto')?.value);
+          if (!name || !role || !image) {
+            notify('Team member ke liye Name, Role aur Photo URL required hai.', 'warn');
+            return;
+          }
+          const items = readTeamMembers();
+          items.push({ id: `team-${Date.now()}`, name, role, image });
+          if (!writeArray(CUSTOM_TEAM_KEY, items)) {
+            notify('Team member save failed.', 'warn');
+            return;
+          }
+          clearTeamForm();
+          setTeamEditMode(false);
+          renderTeamCustomList();
+          notify('Team member added.');
+          return;
+        }
+        if (action === 'start-edit-team-member') {
+          const id = btn.getAttribute('data-item-id');
+          const item = readTeamMembers().find((x) => x.id === id);
+          if (!item) {
+            notify('Team member not found.', 'warn');
+            return;
+          }
+          byId('adminTeamEditId').value = item.id;
+          byId('adminTeamMemberName').value = item.name;
+          byId('adminTeamMemberRole').value = item.role;
+          byId('adminTeamMemberPhoto').value = item.image;
+          setTeamEditMode(true);
+          notify('Edit mode enabled for selected member.');
+          return;
+        }
+        if (action === 'save-team-member-edit') {
+          const id = String(byId('adminTeamEditId')?.value || '').trim();
+          if (!id) {
+            notify('Select a member to edit first.', 'warn');
+            return;
+          }
+          const name = String(byId('adminTeamMemberName')?.value || '').trim();
+          const role = String(byId('adminTeamMemberRole')?.value || '').trim();
+          const image = safeUrl(byId('adminTeamMemberPhoto')?.value);
+          if (!name || !role || !image) {
+            notify('Team member ke liye Name, Role aur Photo URL required hai.', 'warn');
+            return;
+          }
+          const next = readTeamMembers().map((x) => (x.id === id ? { ...x, name, role, image } : x));
+          if (!writeArray(CUSTOM_TEAM_KEY, next)) {
+            notify('Team member update failed.', 'warn');
+            return;
+          }
+          clearTeamForm();
+          setTeamEditMode(false);
+          renderTeamCustomList();
+          notify('Team member updated.');
+          return;
+        }
+        if (action === 'cancel-team-member-edit') {
+          clearTeamForm();
+          setTeamEditMode(false);
+          notify('Edit cancelled.');
+          return;
+        }
+        if (action === 'delete-team-member') {
+          const id = btn.getAttribute('data-item-id');
+          const next = readTeamMembers().filter((x) => x.id !== id);
+          if (!writeArray(CUSTOM_TEAM_KEY, next)) {
+            notify('Team member delete failed.', 'warn');
+            return;
+          }
+          clearTeamForm();
+          setTeamEditMode(false);
+          renderTeamCustomList();
+          notify('Team member deleted.');
+          return;
+        }
+        if (action === 'reset-team-members') {
+          writeArray(CUSTOM_TEAM_KEY, defaultTeamMembers);
+          clearTeamForm();
+          setTeamEditMode(false);
+          renderTeamCustomList();
+          notify('Team reset to default members.');
+          return;
+        }
+        if (action === 'load-hero-settings') {
+          const s = readStored();
+          fillForm({
+            ...collectForm(),
+            heroTitle: s.heroTitle,
+            heroSubtitle: s.heroSubtitle,
+            ctaPrimary: s.ctaPrimary,
+            ctaSecondary: s.ctaSecondary,
+            searchPlaceholder: s.searchPlaceholder
+          });
+          notify('Hero settings loaded.');
+          return;
+        }
+        if (action === 'reset-hero-settings') {
+          fillForm({
+            ...collectForm(),
+            heroTitle: defaults.heroTitle,
+            heroSubtitle: defaults.heroSubtitle,
+            ctaPrimary: defaults.ctaPrimary,
+            ctaSecondary: defaults.ctaSecondary,
+            searchPlaceholder: defaults.searchPlaceholder
+          });
+          notify('Hero fields reset. Click Save Hero.');
+          return;
+        }
+        if (action === 'save-contact-settings') {
+          const ok = writeStored({
+            supportEmail: readField('supportEmail'),
+            supportPhone: readField('supportPhone'),
+            officeLocation: readField('officeLocation')
+          });
+          notify(ok ? 'Contact settings saved.' : 'Contact settings save failed.', ok ? 'ok' : 'warn');
+          return;
+        }
+        if (action === 'save-explore-settings') {
+          const ok = writeStored({
+            exploreTitle: readField('exploreTitle'),
+            exploreSubtitle: readField('exploreSubtitle'),
+            catAll: readField('catAll'),
+            catLandmarks: readField('catLandmarks'),
+            catFestivals: readField('catFestivals'),
+            catCuisine: readField('catCuisine'),
+            catCulture: readField('catCulture'),
+            catSpiritual: readField('catSpiritual'),
+            catWildlife: readField('catWildlife')
+          });
+          notify(ok ? 'Explore settings saved.' : 'Explore settings save failed.', ok ? 'ok' : 'warn');
+          return;
+        }
+        if (action === 'load-explore-settings') {
+          const s = readStored();
+          fillForm({
+            ...collectForm(),
+            exploreTitle: s.exploreTitle,
+            exploreSubtitle: s.exploreSubtitle,
+            catAll: s.catAll,
+            catLandmarks: s.catLandmarks,
+            catFestivals: s.catFestivals,
+            catCuisine: s.catCuisine,
+            catCulture: s.catCulture,
+            catSpiritual: s.catSpiritual,
+            catWildlife: s.catWildlife
+          });
+          notify('Explore settings loaded.');
+          return;
+        }
+        if (action === 'reset-explore-settings') {
+          fillForm({
+            ...collectForm(),
+            exploreTitle: defaults.exploreTitle,
+            exploreSubtitle: defaults.exploreSubtitle,
+            catAll: defaults.catAll,
+            catLandmarks: defaults.catLandmarks,
+            catFestivals: defaults.catFestivals,
+            catCuisine: defaults.catCuisine,
+            catCulture: defaults.catCulture,
+            catSpiritual: defaults.catSpiritual,
+            catWildlife: defaults.catWildlife
+          });
+          notify('Explore fields reset. Click Save Explore.');
+          return;
+        }
+        if (action === 'save-blog-settings') {
+          const ok = writeStored({
+            blogTitle: readField('blogTitle'),
+            blogSubtitle: readField('blogSubtitle')
+          });
+          notify(ok ? 'Blog settings saved.' : 'Blog settings save failed.', ok ? 'ok' : 'warn');
+          return;
+        }
+        if (action === 'load-blog-settings') {
+          const s = readStored();
+          fillForm({
+            ...collectForm(),
+            blogTitle: s.blogTitle,
+            blogSubtitle: s.blogSubtitle
+          });
+          notify('Blog settings loaded.');
+          return;
+        }
+        if (action === 'reset-blog-settings') {
+          fillForm({
+            ...collectForm(),
+            blogTitle: defaults.blogTitle,
+            blogSubtitle: defaults.blogSubtitle
+          });
+          notify('Blog fields reset. Click Save Blog.');
+          return;
+        }
+        if (action === 'save-media-integration-settings') {
+          const ok = writeStored({
+            mediaTitle: readField('mediaTitle'),
+            mediaSubtitle: readField('mediaSubtitle'),
+            mediaYoutubeUrl: readField('mediaYoutubeUrl'),
+            mediaYoutubeTitle: readField('mediaYoutubeTitle'),
+            mediaInsta1: readField('mediaInsta1'),
+            mediaInsta2: readField('mediaInsta2'),
+            mediaInsta3: readField('mediaInsta3')
+          });
+          notify(ok ? 'Media Integration settings saved.' : 'Media settings save failed.', ok ? 'ok' : 'warn');
+          return;
+        }
+        if (action === 'load-media-integration-settings') {
+          const s = readStored();
+          fillForm({
+            ...collectForm(),
+            mediaTitle: s.mediaTitle,
+            mediaSubtitle: s.mediaSubtitle,
+            mediaYoutubeUrl: s.mediaYoutubeUrl,
+            mediaYoutubeTitle: s.mediaYoutubeTitle,
+            mediaInsta1: s.mediaInsta1,
+            mediaInsta2: s.mediaInsta2,
+            mediaInsta3: s.mediaInsta3
+          });
+          notify('Media settings loaded.');
+          return;
+        }
+        if (action === 'reset-media-integration-settings') {
+          fillForm({
+            ...collectForm(),
+            mediaTitle: defaults.mediaTitle,
+            mediaSubtitle: defaults.mediaSubtitle,
+            mediaYoutubeUrl: defaults.mediaYoutubeUrl,
+            mediaYoutubeTitle: defaults.mediaYoutubeTitle,
+            mediaInsta1: defaults.mediaInsta1,
+            mediaInsta2: defaults.mediaInsta2,
+            mediaInsta3: defaults.mediaInsta3
+          });
+          notify('Media fields reset. Click Save Media.');
+          return;
+        }
+        if (action === 'load-contact-settings') {
+          const s = readStored();
+          fillForm({
+            ...collectForm(),
+            supportEmail: s.supportEmail,
+            supportPhone: s.supportPhone,
+            officeLocation: s.officeLocation
+          });
+          notify('Contact settings loaded.');
+          return;
+        }
+        if (action === 'reset-contact-settings') {
+          fillForm({
+            ...collectForm(),
+            supportEmail: defaults.supportEmail,
+            supportPhone: defaults.supportPhone,
+            officeLocation: defaults.officeLocation
+          });
+          notify('Contact fields reset. Click Save Contact.');
+          return;
+        }
+        if (action === 'save-visibility-settings') {
+          const ok = writeStored({
+            showServices: readField('showServices'),
+            showBlog: readField('showBlog'),
+            showMedia: readField('showMedia')
+          });
+          notify(ok ? 'Visibility settings saved.' : 'Visibility save failed.', ok ? 'ok' : 'warn');
+          return;
+        }
+        if (action === 'load-visibility-settings') {
+          const s = readStored();
+          fillForm({
+            ...collectForm(),
+            showServices: s.showServices,
+            showBlog: s.showBlog,
+            showMedia: s.showMedia
+          });
+          notify('Visibility settings loaded.');
+          return;
+        }
+        if (action === 'reset-visibility-settings') {
+          fillForm({
+            ...collectForm(),
+            showServices: defaults.showServices,
+            showBlog: defaults.showBlog,
+            showMedia: defaults.showMedia
+          });
+          notify('Visibility reset. Click Save Visibility.');
+          return;
+        }
+        if (action === 'clear-site-settings') {
+          try {
+            window.localStorage.removeItem(SITE_SETTINGS_KEY);
+            fillForm({ ...defaults });
+            notify('Saved settings cleared.');
+          } catch (_) {
+            notify('Could not clear saved settings.', 'warn');
+          }
+          return;
+        }
+        if (action === 'open-homepage') {
+          window.open('index.html', '_blank');
+          notify('Homepage opened in new tab.');
+          return;
+        }
+        if (action === 'open-media-page') {
+          window.open('media-gallery.html', '_blank');
+          notify('Media Gallery opened in new tab.');
+          return;
+        }
+        if (action === 'open-blog-section') {
+          window.open('index.html#blog', '_blank');
+          notify('Blog section opened in new tab.');
+          return;
+        }
+        if (action === 'open-admin-signup') {
+          const signupForm = document.querySelector('[data-fb-admin-create-form]');
+          if (signupForm) {
+            signupForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const firstField = signupForm.querySelector('input');
+            if (firstField) firstField.focus();
+            notify('Sign Up form opened.');
+          }
+          return;
+        }
+
+        const label = btn.textContent.trim().toLowerCase();
+
+        if (label === 'download report') {
+          downloadFile(
+            'admin-report.txt',
+            ['Bihar Vihaan Report', `Generated: ${new Date().toLocaleString()}`, 'Focus: Blog, Video, Ads'].join('\n')
+          );
+          notify('Report downloaded.');
+          return;
+        }
+
+        if (label === 'export leads') {
+          downloadFile(
+            'ads-leads.csv',
+            ['Name,Source,Interest', 'Aryan Singh,Contact Form,Branding package', 'Hotel Ganga View,Listing,Sponsored Listing'].join('\n'),
+            'text/csv;charset=utf-8'
+          );
+          notify('Leads exported as CSV.');
+          return;
+        }
+
+        if (label === 'publish pending changes') {
+          notify('Pending changes published.');
+          return;
+        }
+
+        notify(`${btn.textContent.trim()} completed.`);
+      });
+    })();
+  </script>
+  <script defer src="script.js"></script>
+  <script src="firebase-config.js"></script>
+  <script type="module" src="admin-firebase.js"></script>
+</body>
+</html>
