@@ -34,7 +34,7 @@ app.use(helmet({
     },
 })); // Security headers
 app.use(cors({
-    origin: process.env.FRONTEND_URL || ['http://localhost:3000', 'https://your-frontend-url.vercel.app'],
+    origin: process.env.FRONTEND_URL || ['http://localhost:3000', 'https://bihar-vihan.vercel.app'],
     credentials: true
 })); // Cross-origin requests
 app.use(morgan("dev")); // Logging
