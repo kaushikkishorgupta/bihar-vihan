@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Sign up for Bihar Vihaan - Tourism and Cultural Platform" />
+    <title>Sign Up - Bihar Vihaan</title>
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+        }
+        
+        .auth-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid var(--border);
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        
+        .auth-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+        
+        .auth-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            background: var(--background);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--brand);
+            box-shadow: 0 0 0 3px rgba(var(--brand-rgb), 0.1);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn--primary {
+            background: var(--brand);
+            color: white;
+        }
+        
+        .btn--primary:hover {
+            background: var(--brand-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(var(--brand-rgb), 0.3);
+        }
+        
+        .btn--ghost {
+            background: transparent;
+            color: var(--brand);
+            border: 1px solid var(--brand);
+        }
+        
+        .btn--ghost:hover {
+            background: var(--brand);
+            color: white;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .auth-footer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .auth-footer a {
+            color: var(--brand);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .alert {
+            padding: 12px 16px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .alert--success {
+            background: rgba(34, 197, 94, 0.1);
+            color: #16a34a;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+        
+        .alert--error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-top: 2px solid var(--brand);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .back-to-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-to-home:hover {
+            text-decoration: underline;
+        }
+        
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .form-checkbox input[type="checkbox"] {
+            width: auto;
+        }
+        
+        .form-checkbox label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-to-home">← Back to Home</a>
+    
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <img src="/assets/img/LOGO.png" alt="Bihar Vihaan" class="auth-logo">
+                <h1 class="auth-title">Create Account</h1>
+                <p class="auth-subtitle">Join Bihar Vihaan and explore the beauty of Bihar</p>
+            </div>
+            
+            <div id="alertContainer"></div>
+            
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        class="form-input" 
+                        placeholder="Enter your full name"
+                        required
+                    />
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input" 
+                        placeholder="Enter your email"
+                        required
+                    />
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-input" 
+                        placeholder="Create a strong password"
+                        required
+                        minlength="6"
+                    />
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        name="confirmPassword" 
+                        class="form-input" 
+                        placeholder="Confirm your password"
+                        required
+                        minlength="6"
+                    />
+                </div>
+                
+                <div class="form-checkbox">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="/terms-and-conditions.html" target="_blank">Terms and Conditions</a> and <a href="/privacy-policy.html" target="_blank">Privacy Policy</a></label>
+                </div>
+                
+                <button type="submit" class="btn btn--primary" id="signupBtn">
+                    Create Account
+                </button>
+            </form>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Creating account...</p>
+            </div>
+            
+            <div class="auth-footer">
+                <p>Already have an account? <a href="/login.html">Sign in</a></p>
+                <p><a href="/admin.html">Admin Login</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // API Configuration for Production
+        const API_BASE_URL = window.location.hostname === 'localhost' 
+            ? 'http://localhost:3000'
+            : 'https://bihar-vihan-api.onrender.com';
+        
+        console.log('🔧 API Base URL:', API_BASE_URL);
+        console.log('🌍 Environment:', window.location.hostname === 'localhost' ? 'development' : 'production');
+        
+        class SignupHandler {
+            constructor() {
+                this.form = document.getElementById('signupForm');
+                this.alertContainer = document.getElementById('alertContainer');
+                this.loading = document.getElementById('loading');
+                this.signupBtn = document.getElementById('signupBtn');
+                
+                this.init();
+            }
+            
+            init() {
+                this.form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleSignup();
+                });
+            }
+            
+            async handleSignup() {
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const terms = document.getElementById('terms').checked;
+                
+                // Validation
+                if (!this.validateForm(name, email, password, confirmPassword, terms)) {
+                    return;
+                }
+                
+                // Show loading
+                this.showLoading();
+                
+                try {
+                    // Real API call to backend
+                    console.log('🚀 Sending signup request to:', `${API_BASE_URL}/api/auth/signup`);
+                    console.log('📤 Request data:', { name, email, password: '***' });
+                    
+                    const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: name.trim(),
+                            email: email.trim().toLowerCase(),
+                            password: password
+                        })
+                    });
+                    
+                    console.log('📥 Response status:', response.status);
+                    console.log('📥 Response headers:', response.headers);
+                    
+                    const data = await response.json();
+                    console.log('📥 Response data:', data);
+                    
+                    if (data.success) {
+                        // Store user data and token
+                        localStorage.setItem('userToken', data.data.token);
+                        localStorage.setItem('userInfo', JSON.stringify(data.data.user));
+                        
+                        console.log('✅ User created successfully:', data.data.user);
+                        
+                        // Show success message
+                        this.showAlert('Account created successfully! Redirecting to login...', 'success');
+                        
+                        // Redirect to login after 2 seconds
+                        setTimeout(() => {
+                            window.location.href = '/login.html';
+                        }, 2000);
+                    } else {
+                        console.error('❌ Signup failed:', data.message);
+                        this.showAlert(data.message || 'Signup failed. Please try again.', 'error');
+                    }
+                    
+                } catch (error) {
+                    console.error('🚨 Network error:', error);
+                    console.error('🚨 Error details:', {
+                        message: error.message,
+                        stack: error.stack
+                    });
+                    this.showAlert('Signup failed. Please check your internet connection and try again.', 'error');
+                } finally {
+                    this.hideLoading();
+                }
+            }
+            
+            validateForm(name, email, password, confirmPassword, terms) {
+                // Name validation
+                if (name.trim().length < 2) {
+                    this.showAlert('Please enter a valid name', 'error');
+                    return false;
+                }
+                
+                // Email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    this.showAlert('Please enter a valid email address', 'error');
+                    return false;
+                }
+                
+                // Password validation
+                if (password.length < 6) {
+                    this.showAlert('Password must be at least 6 characters long', 'error');
+                    return false;
+                }
+                
+                // Password confirmation
+                if (password !== confirmPassword) {
+                    this.showAlert('Passwords do not match', 'error');
+                    return false;
+                }
+                
+                // Terms validation
+                if (!terms) {
+                    this.showAlert('Please accept the terms and conditions', 'error');
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            showLoading() {
+                this.loading.style.display = 'block';
+                this.signupBtn.disabled = true;
+                this.signupBtn.textContent = 'Creating Account...';
+            }
+            
+            hideLoading() {
+                this.loading.style.display = 'none';
+                this.signupBtn.disabled = false;
+                this.signupBtn.textContent = 'Create Account';
+            }
+            
+            showAlert(message, type) {
+                this.alertContainer.innerHTML = `
+                    <div class="alert alert--${type}">
+                        ${message}
+                    </div>
+                `;
+                
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    this.alertContainer.innerHTML = '';
+                }, 5000);
+            }
+        }
+        
+        // Initialize signup handler when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new SignupHandler();
+        });
+    </script>
+</body>
+</html>

@@ -34,8 +34,14 @@ app.use(helmet({
     },
 })); // Security headers
 app.use(cors({
-    origin: process.env.FRONTEND_URL || ['http://localhost:3000', 'https://bihar-vihan.vercel.app'],
-    credentials: true
+    origin: [
+        'http://localhost:3000',
+        'https://bihar-vihan.vercel.app',
+        'https://your-frontend-domain.vercel.app'
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 })); // Cross-origin requests
 app.use(morgan("dev")); // Logging
 app.use(express.json()); // Parse JSON bodies
@@ -74,8 +80,10 @@ app.get("/api/health", (req, res) => {
 // Import and use routes
 const destinationsRouter = require("./backend/routes/destinations");
 const adminRouter = require("./backend/routes/admin");
+const authRouter = require("./backend/routes/auth");
 app.use("/api/destinations", destinationsRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/auth", authRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
