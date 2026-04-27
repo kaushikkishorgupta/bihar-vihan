@@ -122,3 +122,4 @@ temp/
 # Firebase (if used in future)
 firebase.json
 .firebaserc
+public/assets/img/*.mp4
