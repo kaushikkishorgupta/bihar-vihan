@@ -12,7 +12,7 @@ const path = require("path");
 const app = express();
 
 // Middleware
-app.use(helmet()); // Security headers
+// app.use(helmet()); // Security headers - temporarily disabled for asset testing
 app.use(cors({
     origin: process.env.FRONTEND_URL || ['http://localhost:3000', 'https://your-frontend-url.vercel.app'],
     credentials: true
@@ -23,6 +23,10 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // Serve static files from public folder
 app.use(express.static(path.join(__dirname, "../public")));
+
+// Debug: Log static file path
+console.log("📁 Serving static files from:", path.join(__dirname, "../public"));
+console.log("🔍 Logo file exists:", require("fs").existsSync(path.join(__dirname, "../public/assets/img/Logo.jpg")));
 
 // Database connection with timeout settings (server will work even if MongoDB fails)
 mongoose.connect(process.env.MONGODB_URI, {

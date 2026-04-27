@@ -80,7 +80,7 @@ const seedDestinations = async () => {
 
 // Run seed function if called directly
 if (require.main === module) {
-    mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/bihar-vihan", {
+    mongoose.connect("mongodb+srv://kaushikkishorgupta_db_user:biharvihaan123@biharvihaan.t9v4jsq.mongodb.net/bihar-vihan", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
