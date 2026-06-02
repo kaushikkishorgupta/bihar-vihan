@@ -84,32 +84,36 @@ class DestinationsUI {
             return;
         }
 
-        const destinationsHTML = destinations.map((destination, index) => `
-            <div class="card destination-card" data-destination-id="${destination._id}">
+        const esc = (v) => this.escapeHtml(v);
+        const destinationsHTML = destinations.map((destination) => {
+            const id = esc(destination._id);
+            return `
+            <div class="card destination-card" data-destination-id="${id}">
                 <div class="destination-card__image">
-                    <img src="${destination.image}" alt="${destination.name}" loading="lazy">
+                    <img src="${esc(destination.image)}" alt="${esc(destination.name)}" loading="lazy">
                 </div>
                 <div class="destination-card__body">
-                    <h3 class="destination-card__title">${destination.name}</h3>
-                    <p class="destination-card__location">📍 ${destination.location}</p>
-                    <p class="destination-card__description">${this.truncateText(destination.description, 150)}</p>
+                    <h3 class="destination-card__title">${esc(destination.name)}</h3>
+                    <p class="destination-card__location">📍 ${esc(destination.location)}</p>
+                    <p class="destination-card__description">${esc(this.truncateText(destination.description || '', 150))}</p>
                     
                     <div class="destination-card__meta">
-                        <span class="destination-card__category">${destination.category || 'heritage'}</span>
-                        <span class="destination-card__time">🕐 ${destination.bestTime || 'Best time: Oct-Mar'}</span>
+                        <span class="destination-card__category">${esc(destination.category || 'heritage')}</span>
+                        <span class="destination-card__time">🕐 ${esc(destination.bestTime || 'Best time: Oct-Mar')}</span>
                     </div>
                     
                     <div class="destination-card__actions">
-                        <button class="btn btn--primary" onclick="destinationsUI.viewDestination('${destination._id}')">
+                        <button class="btn btn--primary" onclick="destinationsUI.viewDestination('${id}')">
                             👁 View Details
                         </button>
-                        <button class="btn btn--soft" onclick="destinationsUI.shareDestination('${destination._id}')">
+                        <button class="btn btn--soft" onclick="destinationsUI.shareDestination('${id}')">
                             📤 Share
                         </button>
                     </div>
                 </div>
             </div>
-        `).join('');
+        `;
+        }).join('');
 
         this.destinationsContainer.innerHTML = `
             <div class="destinations-header">
@@ -145,6 +149,16 @@ class DestinationsUI {
         return text.substring(0, maxLength) + '...';
     }
 
+    // Escape user/admin-supplied values before inserting into innerHTML to prevent XSS.
+    escapeHtml(value) {
+        return String(value == null ? '' : value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
     async viewDestination(id) {
         try {
             console.log(`🔍 Viewing destination: ${id}`);
@@ -157,35 +171,36 @@ class DestinationsUI {
     }
 
     showDestinationModal(destination) {
+        const esc = (v) => this.escapeHtml(v);
         const modal = document.createElement('div');
         modal.className = 'destination-modal';
         modal.innerHTML = `
             <div class="modal-backdrop" onclick="destinationsUI.closeModal()">
                 <div class="modal-card" onclick="event.stopPropagation()">
                     <div class="modal-header">
-                        <h3 class="modal-title">${destination.name}</h3>
+                        <h3 class="modal-title">${esc(destination.name)}</h3>
                         <button class="modal-close" onclick="destinationsUI.closeModal()">✕</button>
                     </div>
                     <div class="modal-body">
                         <div class="modal-image">
-                            <img src="${destination.image}" alt="${destination.name}">
+                            <img src="${esc(destination.image)}" alt="${esc(destination.name)}">
                         </div>
                         <div class="modal-content">
-                            <p class="modal-location">📍 ${destination.location}</p>
-                            <p class="modal-description">${destination.description}</p>
+                            <p class="modal-location">📍 ${esc(destination.location)}</p>
+                            <p class="modal-description">${esc(destination.description)}</p>
                             
                             ${destination.attractions && destination.attractions.length > 0 ? `
                                 <div class="modal-attractions">
                                     <h4>🎯 Top Attractions:</h4>
                                     <ul class="attractions-list">
-                                        ${destination.attractions.map(attr => `<li>${attr}</li>`).join('')}
+                                        ${destination.attractions.map(attr => `<li>${esc(attr)}</li>`).join('')}
                                     </ul>
                                 </div>
                             ` : ''}
                             
                             <div class="modal-meta">
-                                <p class="modal-time">🕐 Best Time: ${destination.bestTime || 'October to March'}</p>
-                                <p class="modal-reach">🚗 How to Reach: ${destination.howToReach || 'By road from Patna'}</p>
+                                <p class="modal-time">🕐 Best Time: ${esc(destination.bestTime || 'October to March')}</p>
+                                <p class="modal-reach">🚗 How to Reach: ${esc(destination.howToReach || 'By road from Patna')}</p>
                             </div>
                         </div>
                     </div>
@@ -504,5 +519,3 @@ const destinationsStyles = `
 
 // Add styles to page
 document.head.insertAdjacentHTML('beforeend', destinationsStyles);
-</script>
-`;

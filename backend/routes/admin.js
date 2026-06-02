@@ -3,101 +3,83 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-// Admin credentials (simple for demo)
-const ADMIN_CREDENTIALS = {
-    username: "admin",
-    password: "admin123"
-};
+const config = require("../../config/env");
+const { ok, fail } = require("../utils/response");
 
-// Middleware to parse JSON
-router.use(express.json());
+// Verify a supplied admin password against the configured credentials.
+// Prefers ADMIN_PASSWORD_HASH (bcrypt). Falls back to plaintext ADMIN_PASSWORD
+// for local development only.
+async function isValidAdminPassword(password) {
+    if (config.ADMIN_PASSWORD_HASH) {
+        return bcrypt.compare(password, config.ADMIN_PASSWORD_HASH);
+    }
+    if (!config.isProduction && config.ADMIN_PASSWORD) {
+        return password === config.ADMIN_PASSWORD;
+    }
+    return false;
+}
 
 // POST /api/admin/login - Admin login
 router.post("/login", async (req, res) => {
     try {
-        const { username, password } = req.body;
-        
-        // Basic validation
+        const username = String(req.body.username || "");
+        const password = String(req.body.password || "");
+
         if (!username || !password) {
-            return res.status(400).json({
-                success: false,
-                message: "Username and password are required"
+            return fail(res, {
+                status: 400,
+                message: "Username and password are required",
             });
         }
-        
-        // Check credentials
-        if (username !== ADMIN_CREDENTIALS.username || password !== ADMIN_CREDENTIALS.password) {
-            return res.status(401).json({
-                success: false,
-                message: "Invalid username or password"
+
+        const usernameMatches = username === config.ADMIN_USERNAME;
+        const passwordMatches = await isValidAdminPassword(password);
+
+        if (!usernameMatches || !passwordMatches) {
+            return fail(res, {
+                status: 401,
+                message: "Invalid username or password",
             });
         }
-        
-        // Generate JWT token
+
         const token = jwt.sign(
-            { 
-                username: username,
-                role: "admin",
-                loginTime: new Date().toISOString()
-            },
-            process.env.JWT_SECRET || "your-super-secret-jwt-key-change-this-in-production",
-            { expiresIn: "24h" }
+            { username, role: "admin" },
+            config.JWT_SECRET,
+            { expiresIn: config.JWT_ADMIN_EXPIRES_IN }
         );
-        
-        res.json({
-            success: true,
+
+        // Keep the original top-level { token, user } shape for the admin frontend.
+        return ok(res, {
             message: "Login successful",
-            token: token,
-            user: {
-                username: username,
-                role: "admin"
-            }
+            extra: { token, user: { username, role: "admin" } },
         });
-        
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error.message,
-            message: "Login failed"
-        });
+        return fail(res, { status: 500, message: "Login failed" });
     }
 });
 
 // POST /api/admin/verify - Verify JWT token
 router.post("/verify", async (req, res) => {
     try {
-        const { token } = req.body;
-        
+        const token =
+            req.headers.authorization?.replace("Bearer ", "") || req.body.token;
+
         if (!token) {
-            return res.status(400).json({
-                success: false,
-                message: "Token is required"
-            });
+            return fail(res, { status: 400, message: "Token is required" });
         }
-        
-        // Verify token
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || "your-super-secret-jwt-key-change-this-in-production");
-        
-        res.json({
-            success: true,
-            message: "Token is valid",
-            user: decoded
-        });
-        
+
+        const decoded = jwt.verify(token, config.JWT_SECRET);
+        // Keep the original top-level { user } shape for the admin frontend.
+        return ok(res, { message: "Token is valid", extra: { user: decoded } });
     } catch (error) {
-        res.status(401).json({
-            success: false,
-            message: "Invalid or expired token",
-            error: error.message
-        });
+        return fail(res, { status: 401, message: "Invalid or expired token" });
     }
 });
 
-// POST /api/admin/logout - Logout (client-side token removal)
+// POST /api/admin/logout - Logout (client clears its stored token)
 router.post("/logout", async (req, res) => {
-    res.json({
-        success: true,
-        message: "Logout successful. Please remove token from client storage."
+    return ok(res, {
+        message: "Logout successful. Please remove the token from client storage.",
     });
 });
 

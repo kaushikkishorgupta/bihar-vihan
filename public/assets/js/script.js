@@ -265,7 +265,7 @@
       const url = instaUrls[idx];
       const embedUrl = toInstagramEmbed(url);
       if (embedUrl) card.setAttribute('src', embedUrl);
-    }
+    });
 
     const phone = siteSettings.supportPhone || defaultSiteSettings.supportPhone;
     const email = siteSettings.supportEmail || defaultSiteSettings.supportEmail;

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Destination = require("./models/Destination");
+const { MONGODB_URI } = require("../config/env");
 
 // Sample destinations data
 const sampleDestinations = [
@@ -80,10 +81,7 @@ const seedDestinations = async () => {
 
 // Run seed function if called directly
 if (require.main === module) {
-    mongoose.connect("mongodb+srv://kaushikkishorgupta_db_user:biharvihaan123@biharvihaan.t9v4jsq.mongodb.net/bihar-vihan", {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
+    mongoose.connect(MONGODB_URI)
     .then(async () => {
         console.log("🔗 Connected to MongoDB for seeding");
         await seedDestinations();

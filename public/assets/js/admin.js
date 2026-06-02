@@ -182,19 +182,23 @@ class AdminPanel {
             return;
         }
 
-        const rowsHTML = destinations.map(dest => `
+        const esc = (v) => this.escapeHtml(v);
+        const rowsHTML = destinations.map(dest => {
+            const id = esc(dest._id);
+            return `
             <tr>
-                <td>${dest.name}</td>
-                <td>${dest.location}</td>
-                <td>${this.truncateText(dest.description, 100)}</td>
+                <td>${esc(dest.name)}</td>
+                <td>${esc(dest.location)}</td>
+                <td>${esc(this.truncateText(dest.description || '', 100))}</td>
                 <td>
                     <div class="action-buttons">
-                        <button class="btn btn--secondary" onclick="adminPanel.editDestination('${dest._id}')">✏️ Edit</button>
-                        <button class="btn btn--danger" onclick="adminPanel.deleteDestination('${dest._id}')">🗑️ Delete</button>
+                        <button class="btn btn--secondary" onclick="adminPanel.editDestination('${id}')">✏️ Edit</button>
+                        <button class="btn btn--danger" onclick="adminPanel.deleteDestination('${id}')">🗑️ Delete</button>
                     </div>
                 </td>
             </tr>
-        `).join('');
+        `;
+        }).join('');
         
         tbody.innerHTML = rowsHTML;
     }
@@ -276,7 +280,7 @@ class AdminPanel {
         document.getElementById('dashboardSection').classList.remove('hidden');
         const welcomeMessage = document.getElementById('welcomeMessage');
         if (welcomeMessage && this.user) {
-            welcomeMessage.innerHTML = `<h3>👋 Welcome, ${this.user.username}!</h3><p>Manage destinations from here</p>`;
+            welcomeMessage.innerHTML = `<h3>👋 Welcome, ${this.escapeHtml(this.user.username)}!</h3><p>Manage destinations from here</p>`;
         }
     }
 
@@ -320,6 +324,16 @@ class AdminPanel {
     truncateText(text, maxLength) {
         if (text.length <= maxLength) return text;
         return text.substring(0, maxLength) + '...';
+    }
+
+    // Escape admin-supplied values before inserting into innerHTML to prevent XSS.
+    escapeHtml(value) {
+        return String(value == null ? '' : value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
     }
 }
 
