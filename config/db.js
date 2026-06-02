@@ -1,32 +1,29 @@
 const mongoose = require("mongoose");
+const { MONGODB_URI } = require("./env");
 
-// Database connection function
+// Connect to MongoDB. The connection is optional: if it fails the server keeps
+// running (static pages and health checks still work), matching the original
+// fault-tolerant behaviour.
 const connectDB = async () => {
     try {
-        // Get MongoDB URI from environment variables
-        const mongoURI = process.env.MONGODB_URI || "mongodb://localhost:27017/bihar-vihan";
-        
-        // Connect to MongoDB
-        const conn = await mongoose.connect(mongoURI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        
-        console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+        const conn = await mongoose.connect(MONGODB_URI);
+        console.log(`✅ MongoDB connected: ${conn.connection.host}`);
         return conn;
     } catch (error) {
-        console.error("❌ MongoDB Connection Error:", error.message);
-        process.exit(1); // Exit process with failure
+        console.warn(
+            "⚠️  MongoDB connection failed, continuing without it:",
+            error.message
+        );
+        return null;
     }
 };
 
-// Disconnect function
 const disconnectDB = async () => {
     try {
         await mongoose.disconnect();
-        console.log("✅ MongoDB Disconnected");
+        console.log("✅ MongoDB disconnected");
     } catch (error) {
-        console.error("❌ MongoDB Disconnect Error:", error.message);
+        console.error("❌ MongoDB disconnect error:", error.message);
     }
 };
 

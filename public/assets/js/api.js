@@ -1,7 +1,12 @@
 // API Configuration
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-    ? 'https://bihar-vihan-api.onrender.com/api'
-    : 'http://localhost:3000/api';
+// `process` does not exist in the browser; detect the environment from the host
+// instead. Same-origin "/api" is used in production so the client follows
+// whatever domain the site is served from.
+const API_BASE_URL = (() => {
+    const host = window.location.hostname;
+    const isLocal = host === 'localhost' || host === '127.0.0.1';
+    return isLocal ? 'http://localhost:3000/api' : '/api';
+})();
 
 // API Helper Functions
 class BiharVihaanAPI {

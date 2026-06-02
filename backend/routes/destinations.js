@@ -1,195 +1,151 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+
 const { authenticateToken, requireAdmin } = require("../middleware/auth");
 const Destination = require("../models/Destination");
+const { ok, fail } = require("../utils/response");
 
-// GET /api/destinations - Fetch all destinations
+const isValidId = (id) => mongoose.Types.ObjectId.isValid(id);
+
+// GET /api/destinations - List all destinations
 router.get("/", async (req, res) => {
     try {
         const destinations = await Destination.find({}).sort({ createdAt: -1 });
-        
-        if (destinations.length === 0) {
-            return res.json({
-                success: true,
-                data: [],
-                message: "No destinations found"
-            });
-        }
-        
-        res.json({
-            success: true,
+        return ok(res, {
             data: destinations,
-            count: destinations.length,
-            message: "Destinations fetched successfully"
+            message: destinations.length
+                ? "Destinations fetched successfully"
+                : "No destinations found",
+            extra: { count: destinations.length },
         });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error.message,
-            message: "Failed to fetch destinations"
-        });
+        console.error("List destinations error:", error.message);
+        return fail(res, { status: 500, message: "Failed to fetch destinations" });
     }
 });
 
-// GET /api/destinations/:id - Get single destination
+// GET /api/destinations/:id - Get a single destination
 router.get("/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        
-        // Validate ObjectId
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({
-                success: false,
-                error: "Invalid destination ID",
-                message: "Please provide a valid destination ID"
-            });
+        if (!isValidId(id)) {
+            return fail(res, { status: 400, message: "Invalid destination ID" });
         }
-        
+
         const destination = await Destination.findById(id);
-        
         if (!destination) {
-            return res.status(404).json({
-                success: false,
-                error: "Destination not found",
-                message: "The requested destination does not exist"
-            });
+            return fail(res, { status: 404, message: "Destination not found" });
         }
-        
-        res.json({
-            success: true,
+
+        return ok(res, {
             data: destination,
-            message: "Destination fetched successfully"
+            message: "Destination fetched successfully",
         });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error.message,
-            message: "Failed to fetch destination"
-        });
+        console.error("Get destination error:", error.message);
+        return fail(res, { status: 500, message: "Failed to fetch destination" });
     }
 });
 
-// POST /api/destinations - Add new destination (protected)
+// POST /api/destinations - Create a destination (admin only)
 router.post("/", authenticateToken, requireAdmin, async (req, res) => {
     try {
-        const { name, location, description, image, category, bestTime, howToReach, attractions } = req.body;
-        
-        // Basic validation
-        if (!name || !location || !description) {
-            return res.status(400).json({
-                success: false,
-                error: "Missing required fields",
-                message: "Name, location, and description are required"
-            });
-        }
-        
-        // Create new destination
-        const newDestination = new Destination({
+        const {
             name,
             location,
             description,
-            image: image || '/assets/images/default-destination.jpg',
-            category: category || 'heritage',
+            image,
+            category,
             bestTime,
             howToReach,
-            attractions: attractions || []
+            attractions,
+        } = req.body;
+
+        if (!name || !location || !description) {
+            return fail(res, {
+                status: 400,
+                message: "Name, location, and description are required",
+            });
+        }
+
+        const destination = await Destination.create({
+            name,
+            location,
+            description,
+            image: image || "/assets/images/default-destination.jpg",
+            category: category || "heritage",
+            bestTime,
+            howToReach,
+            attractions: Array.isArray(attractions) ? attractions : [],
         });
-        
-        const savedDestination = await newDestination.save();
-        
-        res.status(201).json({
-            success: true,
-            data: savedDestination,
-            message: "Destination added successfully"
+
+        return ok(res, {
+            status: 201,
+            data: destination,
+            message: "Destination added successfully",
         });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error.message,
-            message: "Failed to add destination"
-        });
+        if (error.name === "ValidationError") {
+            const messages = Object.values(error.errors).map((e) => e.message);
+            return fail(res, { status: 400, message: messages.join(", ") });
+        }
+        console.error("Create destination error:", error.message);
+        return fail(res, { status: 500, message: "Failed to add destination" });
     }
 });
 
-// PUT /api/destinations/:id - Update destination (protected)
+// PUT /api/destinations/:id - Update a destination (admin only)
 router.put("/:id", authenticateToken, requireAdmin, async (req, res) => {
     try {
         const { id } = req.params;
-        const updateData = req.body;
-        
-        // Validate ObjectId
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({
-                success: false,
-                error: "Invalid destination ID",
-                message: "Please provide a valid destination ID"
-            });
+        if (!isValidId(id)) {
+            return fail(res, { status: 400, message: "Invalid destination ID" });
         }
-        
-        const updatedDestination = await Destination.findByIdAndUpdate(
-            id, 
-            updateData, 
-            { new: true, runValidators: true }
-        );
-        
-        if (!updatedDestination) {
-            return res.status(404).json({
-                success: false,
-                error: "Destination not found",
-                message: "The requested destination does not exist"
-            });
+
+        const updated = await Destination.findByIdAndUpdate(id, req.body, {
+            new: true,
+            runValidators: true,
+        });
+
+        if (!updated) {
+            return fail(res, { status: 404, message: "Destination not found" });
         }
-        
-        res.json({
-            success: true,
-            data: updatedDestination,
-            message: "Destination updated successfully"
+
+        return ok(res, {
+            data: updated,
+            message: "Destination updated successfully",
         });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error.message,
-            message: "Failed to update destination"
-        });
+        if (error.name === "ValidationError") {
+            const messages = Object.values(error.errors).map((e) => e.message);
+            return fail(res, { status: 400, message: messages.join(", ") });
+        }
+        console.error("Update destination error:", error.message);
+        return fail(res, { status: 500, message: "Failed to update destination" });
     }
 });
 
-// DELETE /api/destinations/:id - Delete destination (protected)
+// DELETE /api/destinations/:id - Delete a destination (admin only)
 router.delete("/:id", authenticateToken, requireAdmin, async (req, res) => {
     try {
         const { id } = req.params;
-        
-        // Validate ObjectId
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({
-                success: false,
-                error: "Invalid destination ID",
-                message: "Please provide a valid destination ID"
-            });
+        if (!isValidId(id)) {
+            return fail(res, { status: 400, message: "Invalid destination ID" });
         }
-        
-        const deletedDestination = await Destination.findByIdAndDelete(id);
-        
-        if (!deletedDestination) {
-            return res.status(404).json({
-                success: false,
-                error: "Destination not found",
-                message: "The requested destination does not exist"
-            });
+
+        const deleted = await Destination.findByIdAndDelete(id);
+        if (!deleted) {
+            return fail(res, { status: 404, message: "Destination not found" });
         }
-        
-        res.json({
-            success: true,
-            data: deletedDestination,
-            message: "Destination deleted successfully"
+
+        return ok(res, {
+            data: deleted,
+            message: "Destination deleted successfully",
         });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            error: error.message,
-            message: "Failed to delete destination"
-        });
+        console.error("Delete destination error:", error.message);
+        return fail(res, { status: 500, message: "Failed to delete destination" });
     }
 });
 

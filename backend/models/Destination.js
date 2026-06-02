@@ -1,38 +1,51 @@
 const mongoose = require("mongoose");
 
-// Destination Schema for MongoDB
-const destinationSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true
+// Destination schema. Fields beyond name/location/description were previously
+// used by the API routes but absent here, so they were silently dropped on save.
+const destinationSchema = new mongoose.Schema(
+    {
+        name: {
+            type: String,
+            required: true,
+            trim: true,
+        },
+        location: {
+            type: String,
+            required: true,
+            trim: true,
+        },
+        description: {
+            type: String,
+            required: true,
+            trim: true,
+        },
+        image: {
+            type: String,
+            default: "/assets/images/default-destination.jpg",
+        },
+        category: {
+            type: String,
+            trim: true,
+            default: "heritage",
+        },
+        bestTime: {
+            type: String,
+            trim: true,
+        },
+        howToReach: {
+            type: String,
+            trim: true,
+        },
+        attractions: {
+            type: [String],
+            default: [],
+        },
     },
-    location: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    description: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    image: {
-        type: String,
-        required: false,
-        default: "/assets/images/default-destination.jpg"
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now
-    }
-});
+    { timestamps: true }
+);
 
-// Create and export the model
-const Destination = mongoose.model("Destination", destinationSchema);
+// Indexes for the common access patterns (sort by recency, filter by category).
+destinationSchema.index({ createdAt: -1 });
+destinationSchema.index({ category: 1 });
 
-module.exports = Destination;
+module.exports = mongoose.model("Destination", destinationSchema);
